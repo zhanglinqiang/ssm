@@ -22,15 +22,15 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/list")
-    public String list(Map<String,Object> modelAndView){
+    public String list(Map<String,Object> map){
         List<User> users = userService.queryAll();
-        modelAndView.put("users",users);
+        map.put("users",users);
         return "list";
     }
 
     @RequestMapping(value = "/add",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
-    public Boolean add(@ModelAttribute User user){
+    public Boolean add(User user){
         try {
             userService.add(user);
         } catch (Exception e) {
